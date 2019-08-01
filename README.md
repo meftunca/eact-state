@@ -1,28 +1,94 @@
-# react-state
+# @devloops/react-state
 
 > React Global Context State
 
-[![NPM](https://img.shields.io/npm/v/react-state.svg)](https://www.npmjs.com/package/react-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@devloops/react-state.svg)](https://www.npmjs.com/package/@devloops/react-state)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-state
+npm install --save @devloops/react-state
 ```
 
 ## Usage
 
+<iframe src="https://kqvzc.csb.app/" width="100%" height="400px"></iframe>
+
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { GStateProvider, useGState, decorate } from "@devloops/react-state";
+class Store {
+  increment = () => {
+    ++this.value;
+  };
+  decrement = () => {
+    --this.value;
+  };
 
-import { useMyHook } from 'react-state'
+  value = 10;
 
-const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>{example}</div>
-  )
+  setName = name => {
+    console.log("name", name);
+    this.name = name;
+  };
+
+  name = "By Devloops";
 }
+
+const pointFunc = decorate(Store, {
+  increment: "actionWithPerformance",
+  decrement: "actionWithPerformance",
+  setName: "actionWithPerformance",
+  value: "observable",
+  name: "observable"
+});
+const App = () => {
+  return (
+    <GStateProvider point={pointFunc}>
+      <Test />
+    </GStateProvider>
+  );
+};
+const Test = useGState("point")(({ point }) => {
+  return (
+          <input
+            className="form-control"
+            placeholder="Write Your name"
+            value={point.name}
+            onChange={({ target }) => {
+              point.setName(target.value, "asdas");
+            }}
+          />
+          <h2>
+            Score
+            <small style={{ textAlign: "center" }}> {point.value}</small>
+          </h2>
+          <div className="btn-group d-flex ">
+            <button
+              className="btn btn-warning"
+              onClick={() => {
+                point.increment();
+                //or
+                point.value = point.value + 1;
+              }}
+            >
+              increase
+            </button>
+            <button
+              className="btn btn-dark"
+              onClick={() => {
+                 point.decrement();
+                 //or
+                 point.value = point.value - 1;
+              }}
+            >
+              decrease
+            </button>
+          </div>
+  )
+}))
+
 ```
 
 ## License
