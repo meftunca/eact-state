@@ -13,7 +13,7 @@ class Store {
     console.log("name", name);
     this.name = name;
   };
-
+  formState = { email: "", password: "", selectable: "1" };
   name = "By Devloops";
 }
 
@@ -22,6 +22,7 @@ const GStore = decorate(Store, {
   decrement: "actionWithPerformance",
   setName: "actionWithPerformance",
   value: "observable",
+  formState: "observable",
   name: "observable"
 });
 export default GStore;

@@ -40,6 +40,7 @@ const observable = (target, name, descriptor) => {
     return fn;
   };
   descriptor.set = function(newValue, ...arg) {
+    console.log("newValue :", newValue);
     fn = newValue;
     this.setState();
   };

@@ -11,17 +11,13 @@ const App = () => {
 };
 
 const Test = useGState("point")(({ point }) => {
-  const [formState, setFormState] = useState({});
   let ref = useRef(null);
   useEffect(() => {
     console.log("point :", point);
   }, []);
-  const onChange = ({ target: { name, value, ...rest } }) => {
-    // console.log("name,value", name, value, rest);
-    // let newState = formState;
-    // newState[name] = value;
-    // setFormState(Object.assign({}, formState, newState));
-    // console.log("formState", formState);
+  const onChange = ({ target: { name, value } }) => {
+    point.formState[name] = value;
+    point.setState();
   };
 
   return (
@@ -38,7 +34,6 @@ const Test = useGState("point")(({ point }) => {
             placeholder="Write Your name"
             value={point.name}
             onChange={({ target }) => {
-              console.log("target.value", target.value);
               point.setName(target.value, "asdas");
             }}
           />
@@ -69,81 +64,54 @@ const Test = useGState("point")(({ point }) => {
               decrease
             </button>
           </div>
-          <ul className="list-group" style={{ maxHeight: 400, overflow: "scroll" }}>
-            <li className="list-group-item">Cras justo odio</li>
-            <li className="list-group-item">Dapibus ac facilisis in</li>
-            <li className="list-group-item">Morbi leo risus</li>
-            <li className="list-group-item">Porta ac consectetur ac</li>
-            <li className="list-group-item">Vestibulum at eros</li>
-          </ul>
         </div>
         <div className="col-xs-12 col-md-6">
           <br />
           <h1>Storage Test</h1>
           <br />
-          <form ref={ref} onChange={onChange}>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                name="a1"
-                value={formState.a1}
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                name="a2"
-                value={formState.a2}
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                name="a1[b1]"
-                value={formState.a1}
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlSelect2">Example multiple select</label>
-              <select name="selectable" multiple className="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-            <div className="form-group form-check">
-              <input type="checkbox" name="a3" value={formState.a3} className="form-check-input" id="exampleCheck1" />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
-              </label>
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
-          <p>{JSON.stringify(formState)}</p>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input
+              type="email"
+              name="email"
+              value={point.formState.email}
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              onChange={onChange}
+            />
+            <small id="emailHelp" className="form-text text-muted">
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={point.formState.password}
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleFormControlSelect2">Example multiple select</label>
+            <select name="selectable" className="form-control" id="exampleFormControlSelect2" onChange={onChange}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <button type="button" className="btn btn-primary">
+            Submit
+          </button>
+          <p>{JSON.stringify(point.formState, null, "\t")}</p>
         </div>
       </div>
     </div>

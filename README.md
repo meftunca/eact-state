@@ -11,9 +11,9 @@
 npm install --save @devloops/react-state
 ```
 
-## Usage
+## [Demo](https://meftunca.github.io/react-state/)
 
-<iframe src="https://kqvzc.csb.app/" width="100%" height="400px"></iframe>
+## Usage
 
 ```jsx
 import React, { Component } from "react";
