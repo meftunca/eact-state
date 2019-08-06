@@ -1,6 +1,8 @@
 # @devloops/react-state
 
-> React Global Context State
+> React Global Context State (Gzipped 2.58 KB) 💥💥💥
+
+> Please let me know your feedback 😇
 
 [![NPM](https://img.shields.io/npm/v/@devloops/react-state.svg)](https://www.npmjs.com/package/@devloops/react-state)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
