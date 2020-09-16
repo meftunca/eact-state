@@ -1,6 +1,6 @@
 # @devloops/react-state
 
-> React Global Context State (Gzipped 2.58 KB) 💥💥💥
+> React Global Context State (Gzipped 1.1 KB) 💥💥💥
 
 > Please let me know your feedback 😇
 
